@@ -2,6 +2,7 @@ import json
 from trello import TrelloApi
 import pandas as pd
 import argparse
+from tqdm import tqdm
 
 
 def xls_to_trello(args):
@@ -25,8 +26,7 @@ def xls_to_trello(args):
     for name in df["Custom status"].unique():
         lists[name] = trello.boards.new_list(board["id"], name)
 
-    for _, row in df.iterrows():
-        print(row)
+    for _, row in tqdm(df.iterrows(), desc="Exporting tasks", total=len(df)):
         list_id = lists[row["Custom status"]]["id"]
         trello.lists.new_card(
             list_id,
