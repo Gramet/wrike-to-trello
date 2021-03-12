@@ -1,0 +1,3 @@
+trello
+pandas
+xlrd>=1.0.0
