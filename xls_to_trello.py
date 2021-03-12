@@ -20,13 +20,10 @@ def xls_to_trello(args):
     else:
         BOARD_ID = args.board_id
 
-    print(BOARD_ID)
     df = pd.read_excel(args.path)
     lists = {}
     for name in df["Custom status"].unique():
         lists[name] = trello.boards.new_list(board["id"], name)
-
-    print(lists)
 
     for _, row in df.iterrows():
         print(row)
